@@ -20,8 +20,8 @@
             </style>
         @endif
     </head>
-    <div style="display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0;background: linear-gradient(to right,rgb(68, 19, 111),rgb(255, 255, 255));">
-    <h1 style="font-size: 80px; font-family: 'Space Mono', monospace; font-weight: bold; color:rgb(255, 255, 255); text-align: center; text-transform: uppercase; letter-spacing: 2px; padding: 20px; border-radius: 10px; ">Highlife</h1>
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0;background: linear-gradient(to right,rgb(51, 54, 95),rgb(255, 255, 255));">
+    <h1 style="font-size: 80px; font-family: 'Space Mono', monospace; font-weight: bold; color:rgb(255, 255, 255); text-align: center; text-transform: uppercase; letter-spacing: 2px; padding: 20px; border-radius: 10px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6); "><a href="{{ route('hotels.index') }}" style="color: inherit; text-decoration: none;">Highlife</a></h1>
     </div>
 
     </body>
