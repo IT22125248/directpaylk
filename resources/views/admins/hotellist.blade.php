@@ -29,13 +29,7 @@
                             N/A
                         @endif
                     </td>
-                    <td>
-                        @if($hotel->deleted_at)
-                            {{ $hotel->deleted_at->format('Y-m-d') }}
-                        @else
-                            N/A
-                        @endif
-                    </td>
+                    
                     <td>
                         <!-- Edit and Delete Actions -->
                         <a href="{{ route('admins.edit', $hotel->id) }}" class="btn btn-warning">Edit</a>
