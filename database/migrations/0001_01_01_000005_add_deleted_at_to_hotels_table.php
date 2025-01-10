@@ -9,18 +9,22 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
-{
-    Schema::table('hotels', function (Blueprint $table) {
-        $table->softDeletes(); // Adds the 'deleted_at' column
-    });
-}
+    public function up(): void
+    {
+        Schema::table('hotels', function (Blueprint $table) {
+            if (!Schema::hasColumn('hotels', 'deleted_at')) {
+                $table->softDeletes(); // Adds the 'deleted_at' column
+            }
+        });
+    }
 
-public function down()
-{
-    Schema::table('hotels', function (Blueprint $table) {
-        $table->dropSoftDeletes(); // Drops the 'deleted_at' column
-    });
-}
-
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::table('hotels', function (Blueprint $table) {
+            $table->dropSoftDeletes(); // Drops the 'deleted_at' column
+        });
+    }
 };

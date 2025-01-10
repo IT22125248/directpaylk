@@ -20,7 +20,11 @@ class HotelController extends Controller
             'image' => 'required|image',
         ]);
 
-        $imagePath = $request->file('image')->store('images', 'public');
+        try {
+            $imagePath = $request->file('image')->store('images', 'public');
+        } catch (\Exception $e) {
+            return back()->withErrors(['image' => 'Failed to upload image.'])->withInput();
+        }
 
         Hotel::create([
             'name' => $request->name,
@@ -28,15 +32,16 @@ class HotelController extends Controller
             'image' => $imagePath,
         ]);
 
-        return redirect()->route('hotels.index');
+        return redirect()->route('hotels.index')->with('success', 'Hotel created successfully.');
     }
+
 
     public function index()
     {
         $hotels = Hotel::all();
         return view('hotels.index', compact('hotels'));
 
-        
+
     }
 
     public function hotellist()
@@ -53,7 +58,7 @@ class HotelController extends Controller
          $hotel = Hotel::findOrFail($id);
          return view('admins.edit', compact('hotel'));
      }
- 
+
      // Update the hotel details in the database
      public function update(Request $request, $id)
      {
@@ -61,35 +66,35 @@ class HotelController extends Controller
              'name' => 'required',
              'description' => 'required',
          ]);
- 
+
          $hotel = Hotel::findOrFail($id);
          $hotel->name = $request->name;
          $hotel->description = $request->description;
- 
+
          if ($request->hasFile('image')) {
              $imagePath = $request->file('image')->store('images', 'public');
              $hotel->image = $imagePath;
          }
- 
+
          $hotel->save();
- 
-         return redirect()->route('admins.hotellist');
+
+         return redirect()->route('admins.hotellist')->with('success', 'Edited Successfully!');
      }
- 
+
      // Soft delete the hotel
      public function destroy($id)
      {
          $hotel = Hotel::findOrFail($id);
          $hotel->delete(); // Soft delete
- 
-         return redirect()->route('admins.hotellist');
+
+         return redirect()->route('admins.hotellist')->with('success', 'Deleted Successfully!');
      }
 
      public function restore($id)
      {
          $hotel = Hotel::withTrashed()-> find($id);
          $hotel->restore(); // Soft delete
- 
+
          return redirect()->route('admins.hotellist');
      }
 

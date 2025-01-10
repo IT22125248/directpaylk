@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotel List</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
         margin: 0;
@@ -80,7 +82,7 @@
     }
 
     /* Container for hotel items */
-    
+
     /* Container for hotel items */
     .hotel-container {
         display: flex;
@@ -88,7 +90,7 @@
         gap: 20px;
         padding: 20px;
         justify-content: space-between;
-        
+
     }
 
     /* Style for each hotel box */
@@ -122,6 +124,9 @@
         color: white;
         margin-top: 10px;
     }
+        .btn btn-success{
+            background-color: #152068;
+        }
 
     /* Add responsive styling */
     @media (max-width: 768px) {
@@ -137,17 +142,18 @@
             font-size: 16px;
             padding: 10px 25px;
         }
-    } 
+    }
     </style>
 </head>
 <body>
-    
+
     <div class="overlay">
     <h1 >Hotels in Srilanka</h1>
     <h2>Add your hotels here</h2>
-    <a href="{{ route('hotels.create') }}">Add New Hotel</a>
+    {{--<a href="{{ route('hotels.create') }}">Add New Hotel</a>--}}
+        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addHotelModal">Add New Hotel</a>
     </div>
-   
+
     <div class="hotel-container">
         @foreach ($hotels as $hotel)
             <div class="hotel-box">
@@ -157,6 +163,47 @@
             </div>
         @endforeach
     </div>
-   
+
+    <!-- Modal for Adding a New Hotel -->
+    <div class="modal fade" id="addHotelModal" tabindex="-1" aria-labelledby="addHotelModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addHotelModalLabel">Add New Hotel</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('hotels.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group mb-3">
+                            <label for="name">Hotel Name</label>
+                            <input type="text" id="name" name="name" class="form-control" required>
+                            @error('name')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="description">Description</label>
+                            <textarea id="description" name="description" class="form-control" required></textarea>
+                            @error('description')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="image">Hotel Image</label>
+                            <input type="file" id="image" name="image" class="form-control" required>
+                            @error('image')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <button type="submit" class="btn btn-success">Add Hotel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

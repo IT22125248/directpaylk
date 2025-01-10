@@ -17,7 +17,7 @@
             <div class="card text-bg-success mb-3">
                 <div class="card-body">
                     <h5 class="card-title">Total Users</h5>
-                      
+                    <p class="card-text">0</p>
                 </div>
             </div>
         </div>
@@ -25,7 +25,7 @@
             <div class="card text-bg-warning mb-3">
                 <div class="card-body">
                     <h5 class="card-title">Total Bookings</h5>
-                    
+                    <p class="card-text">0</p>
                 </div>
             </div>
         </div>
