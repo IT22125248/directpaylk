@@ -89,7 +89,7 @@
         flex-wrap: wrap;
         gap: 20px;
         padding: 20px;
-        justify-content: space-between;
+
 
     }
 
