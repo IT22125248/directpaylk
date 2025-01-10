@@ -90,7 +90,6 @@
         gap: 20px;
         padding: 20px;
 
-
     }
 
     /* Style for each hotel box */
